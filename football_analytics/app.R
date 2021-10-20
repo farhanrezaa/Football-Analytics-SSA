@@ -137,9 +137,9 @@ ui <- fluidPage(theme = shinytheme("simplex"),
         # Show a plot of the generated distribution
         mainPanel(
             tabsetPanel(type = "tab",
-                        tabPanel("Table Summary", dataTableOutput(outputId = "player_stats_summary")),
+                        tabPanel("Table Summary", h4('All Metrics per 90 Minutes'), dataTableOutput(outputId = "player_stats_summary")),
                         tabPanel("Chart Summary", plotOutput("radar_chart", click = "plot_click")),
-                        tabPanel("Metrics Definition", h3('All Metrics per 90 Minutes'), dataTableOutput(outputId = "definition"))
+                        tabPanel("Metrics Definition", h4('All Metrics per 90 Minutes'), dataTableOutput(outputId = "definition"))
                 )
             )
         )

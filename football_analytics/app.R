@@ -205,7 +205,7 @@ server <- function(input, output) {
                rgb(0, 0, 1, 0.25),
                rgb(1, 1, 0, 0.35))
     
-    definition_table <- data.frame(Metrics = c('npGoal', 'xA', 'npxG', 'Key Pass', 'Shoot', 'Pen Touc', 'xG + xA'),
+    definition_table <- data.frame(Metrics = c('npGoal', 'xA', 'npxG', 'Key Pass', 'Shoot', 'Pen Touch', 'xG + xA'),
                                    Definition = c(
                                        'Non-Penalty Goal that Player Scored',
                                        'Measure the likelihood that a given pass will become an assist. So if xA = 0.5, that means on average the player will have 1 assist every 2 matches',

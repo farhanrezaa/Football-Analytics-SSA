@@ -90,7 +90,7 @@ player_stats = function(player_url, season){
 ui <- fluidPage(theme = shinytheme("simplex"),
                 navbarPage(
                     title = "Self Service Football Analytics",
-                    h5("Source : fbref.com & Sports Reference LLC"),
+                    h5("Data Source : fbref.com & Sports Reference LLC"),
         # Sidebar with a slider input for number of bins 
         sidebarLayout(
             sidebarPanel(

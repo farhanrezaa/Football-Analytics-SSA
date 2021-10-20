@@ -118,20 +118,28 @@ ui <- fluidPage(theme = shinytheme("simplex"),
                             
                 textInput("player_link_1", "Player 1 Link (Get from fbref.com/en/players)", "https://fbref.com/en/players/f25c8e3a/Naby-Keita"),
                 textInput("player_link_2", "Player 2 Link (Get from fbref.com/en/players)", "https://fbref.com/en/players/77e84962/Thiago-Alcantara"),
-                textInput("season_1", "Season of Player 1", "2020-2021"),
-                textInput("season_2", "Season of Player 2", "2020-2021"),
+                textInput("season_1", "Season of Player 1", "2021-2022"),
+                textInput("season_2", "Season of Player 2", "2021-2022"),
                 p("Click Run to Process"),
                 p("The Process will take ~20 seconds"),
                 actionButton("do", "Run"),
                 br(),
                 br(),
+                
+                h6("Powered by:"),
+                tags$img(
+                    src = 'worldfootballr.png',
+                    height = 125,
+                    width = 123
+                )
             ),
 
         # Show a plot of the generated distribution
         mainPanel(
             tabsetPanel(type = "tab",
                         tabPanel("Table Summary", dataTableOutput(outputId = "player_stats_summary")),
-                        tabPanel("Chart Summary", plotOutput("radar_chart", click = "plot_click"))
+                        tabPanel("Chart Summary", plotOutput("radar_chart", click = "plot_click")),
+                        tabPanel("Metrics Definition", h3('All Metrics per 90 Minutes'), dataTableOutput(outputId = "definition"))
                 )
             )
         )
@@ -196,6 +204,18 @@ server <- function(input, output) {
                rgb(0, 1, 0, 0.25),
                rgb(0, 0, 1, 0.25),
                rgb(1, 1, 0, 0.35))
+    
+    definition_table <- data.frame(Metrics = c('npGoal', 'xA', 'npxG', 'Key Pass', 'Shoot', 'Pen Touc', 'xG + xA'),
+                                   Definition = c(
+                                       'Non-Penalty Goal that Player Scored',
+                                       'Measure the likelihood that a given pass will become an assist. So if xA = 0.5, that means on average the player will have 1 assist every 2 matches',
+                                       'Measures the quality of a shot (exclude Penalty) based on several variables such as assist type, shot angle and distance from goal, whether it was a headed shot and whether it was defined as a big chance. So if npxG = 0.5, that means on average the player will have 1 goal (exclude penalty) every 2 matches',
+                                       'The final pass or pass-cum-shot leading to the recipient of the ball having an attempt at goal without scoring.',
+                                       '#Shoot the player produce',
+                                       '#Touches the player have in opposition penalty box',
+                                       'Expected Goals (exclude Pen) + Expected Assists'
+                                   )
+    )
 
     output$player_stats_summary <- renderDataTable({player_comparison()})
     output$radar_chart <- renderPlot({
@@ -214,6 +234,9 @@ server <- function(input, output) {
                bty = "n", pch = 20, col = areas,
                text.col = "grey25", pt.cex = 2)
     })
+    
+    output$definition <- renderDataTable({definition_table})
+    
 }
 
 # Run the application 

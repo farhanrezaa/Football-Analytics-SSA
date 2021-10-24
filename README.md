@@ -1,6 +1,9 @@
 # Football-Analytics-SSA
 Self Service Analytics for SSA
 
+You can access the API for Player Stats using URL : beta.rstudioconnect.com/content/c3a17980-fffe-419c-91d1-df249820c13a
+and endpoint "stats"
+
 ---- WORK IN PROGRESS -----
 
 Creating Self Service Football Analytics using RShiny and worldfootballR package. 

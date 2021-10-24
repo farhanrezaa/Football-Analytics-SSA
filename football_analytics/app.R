@@ -12,6 +12,7 @@ library(worldfootballR)
 library(dplyr)
 library(ggradar)
 library(fmsb)
+library(knitr)
 
 options(shiny.maxRequestSize = 200*1024^2)
 options("digits" = 2) #Max 2 Decimal Digits
@@ -215,8 +216,7 @@ server <- function(input, output) {
                                        'The final pass or pass-cum-shot leading to the recipient of the ball having an attempt at goal without scoring.',
                                        '#Shoot the player produce',
                                        '#Touches the player have in opposition penalty box',
-                                       'Expected Goals (exclude Pen) + Expected Assists'
-                                   )
+                                       'Expected Goals (exclude Pen) + Expected Assists')
     )
 
     output$player_stats_summary <- renderDataTable({player_comparison()})

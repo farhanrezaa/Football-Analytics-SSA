@@ -12,6 +12,7 @@ library(worldfootballR)
 library(dplyr)
 library(ggradar)
 library(fmsb)
+library(knitr)
 
 options(shiny.maxRequestSize = 200*1024^2)
 options("digits" = 2) #Max 2 Decimal Digits
@@ -90,7 +91,7 @@ player_stats = function(player_url, season){
 ui <- fluidPage(theme = shinytheme("simplex"),
                 navbarPage(
                     title = "Self Service Football Analytics",
-                    h5("Source : fbref.com"),
+                    h5("Data Source : fbref.com & Sports Reference LLC"),
         # Sidebar with a slider input for number of bins 
         sidebarLayout(
             sidebarPanel(
@@ -136,6 +137,8 @@ ui <- fluidPage(theme = shinytheme("simplex"),
 
         # Show a plot of the generated distribution
         mainPanel(
+            conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                             tags$div("Loading... Please Wait ",id="loadmessage")), 
             tabsetPanel(type = "tab",
                         tabPanel("Table Summary", h4('All Metrics per 90 Minutes'), dataTableOutput(outputId = "player_stats_summary")),
                         tabPanel("Chart Summary", plotOutput("radar_chart", click = "plot_click")),
@@ -213,8 +216,7 @@ server <- function(input, output) {
                                        'The final pass or pass-cum-shot leading to the recipient of the ball having an attempt at goal without scoring.',
                                        '#Shoot the player produce',
                                        '#Touches the player have in opposition penalty box',
-                                       'Expected Goals (exclude Pen) + Expected Assists'
-                                   )
+                                       'Expected Goals (exclude Pen) + Expected Assists')
     )
 
     output$player_stats_summary <- renderDataTable({player_comparison()})

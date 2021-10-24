@@ -1,0 +1,14 @@
+name: football_analytics
+title: football_analytics
+username: farhanrezagumay
+account: farhanrezagumay
+server: beta.rstudioconnect.com
+hostUrl: https://beta.rstudioconnect.com/__api__
+appId: 17073
+bundleId: 69627
+url: https://beta.rstudioconnect.com/content/c3a17980-fffe-419c-91d1-df249820c13a/
+when: 1635083315.76607
+lastSyncTime: 1635083315.76608
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: app.R|Dockerfile|www/Background.png|www/worldfootballr.png
